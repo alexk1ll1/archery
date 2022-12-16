@@ -1,0 +1,88 @@
+h2 {
+    color: white;
+}
+label {
+    color: white;
+}
+#contentBox {
+    margin-top: 15vh;
+    border-radius: 20px;
+    display: none;
+}
+
+#header {
+    margin-top: 10vh;
+}
+
+#startButton {
+    margin-top: 40vh;
+}
+
+#menuButtonsMiddle2 {
+    margin-top: 2.5vh;
+    margin-bottom: 5vh;
+}
+
+#menuButtonTop {
+    margin-top: 10vh;
+}
+
+#menuButtonBottom {
+    margin-bottom: 10vh;
+}
+
+#mainNav {
+    opacity: 0.7;
+}
+
+#contentBox{
+    height: 70vw;
+    width: 70vw;
+}
+#parkourErstellung{
+    margin-top: 10vh;
+}
+.mb-3 {
+    width: 200px;
+}
+
+#createUserContainer {
+}
+#mainMenuContainer {
+    display: none;
+}
+
+body {
+    /* Location of the image */
+    background-image: url(./images/quiver.jpg);
+
+    /* Image is centered vertically and horizontally at all times */
+    background-position: center center;
+
+    /* Image doesn't repeat */
+    background-repeat: no-repeat;
+
+    /* Makes the image fixed in the viewport so that it doesn't move when
+the content height is greater than the image height */
+    background-attachment: fixed;
+
+    /* This is what makes the background image rescale based on its container's size */
+    background-size: cover;
+
+    /* Pick a solid background color that will be displayed while the background image is loading */
+    background-color: #464646;
+
+    /* SHORTHAND CSS NOTATION
+* background: url(background-photo.jpg) center center cover no-repeat fixed;
+*/
+    overflow: hidden;
+}
+
+/* For mobile devices */
+@media only screen and (max-width: 767px) {
+    body {
+        /* The file size of this background image is 93% smaller
+* to improve page load speed on mobile internet connections */
+        background-image: url(./images/quiver.jpg);
+    }
+}

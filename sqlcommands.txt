@@ -1,0 +1,54 @@
+create database archery;
+
+use archery;
+
+create table user (
+	id int not null auto_increment,
+    v_name varchar(100),
+    name varchar(100),
+    nickname varchar(100),
+    PRIMARY KEY(id)
+    );
+
+create table parcour (
+	id int not null auto_increment,
+    name varchar(100),
+    location varchar(100),
+    animal_count int,
+    PRIMARY KEY(id)
+   );
+
+create table counting_method (
+	id int not null auto_increment,
+	arrow int,
+   	ring int,
+	points int,
+    PRIMARY KEY(id)
+   );
+   
+create table party (
+	id int not null auto_increment,
+	parcour_id int,
+	date timestamp,
+    PRIMARY KEY(id),
+	Foreign key (parcour_id) references parcour (id)
+   );
+
+create table user_party (
+	id int not null auto_increment,
+    user_id int,
+   	party_id int,
+    PRIMARY KEY(id),
+	Foreign key (user_id) references user (id),
+	Foreign key (party_id) references party (id)
+   );
+   
+create table arrow (
+	id int not null auto_increment,
+	user_party_id int,
+   	counting_id int,
+	animal_number int,
+    PRIMARY KEY(id),
+	Foreign key (user_party_id) references user_party (id),
+	Foreign key (counting_id) references counting_method (id)
+   );
