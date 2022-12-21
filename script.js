@@ -1,3 +1,5 @@
+
+
 $("#contentBox").fadeIn(2000);
 
 $("#buttonGoToParkourCreation").click(function(){
@@ -53,7 +55,6 @@ function ajaxpost () {
 */
 
 $("#buttonCreateParkour").click(function(){
-    alert("Parkour wird erstellt worden sein");
     $('#parkourForm').submit(function(e){
         e.preventDefault();
         $.ajax({
@@ -71,7 +72,6 @@ $("#buttonCreateParkour").click(function(){
 });
 
 $("#buttonCreateUser").click(function(){
-    alert("User wird erstellt worden sein")
     $('#userForm').submit(function(e){
         e.preventDefault();
         $.ajax({

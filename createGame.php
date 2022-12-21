@@ -46,6 +46,15 @@
     </div>
 </nav>
 
+<div id="message">
+
+</div>
+
+<button id="volltreffer" onclick="nextVolltreffer()">volltreffer</button>
+<button id="mitte" onclick="nextNichtVolltreffer()">mitte</button>
+<button id="aussen" onclick="nextNichtVolltreffer()">außen</button>
+<button id="nicht_getroffen" onclick="nextNichtVolltreffer()">nicht getroffen</button>
+
 <div class="container mt-5">
 <?php
 
@@ -87,8 +96,6 @@ mysqli_stmt_execute($stmt);
 $parcour_id = $_POST["parcour"];
 $party_id = mysqli_insert_id($conn);
 
-$sqlGetAnimalCount = "select * from parcour";
-
 
 $sql = "select animal_count from parcour where id = $parcour_id";
 $result = mysqli_query($conn, $sql);
@@ -96,6 +103,12 @@ $row1 = mysqli_fetch_assoc($result);
 echo "animal_count new:";
 echo $row1["animal_count"];
 echo "<br>";
+
+echo
+  "<script>
+    var animal_count = " . $row1["animal_count"] . ";" .
+  "</script>";
+
 // Insert User Data needed for Game
 foreach ($_POST['user'] as $user_id) {
 
@@ -121,22 +134,94 @@ foreach ($_POST['user'] as $user_id) {
 
 mysqli_select_db($conn,"archery");
 
-$sql="select user.nickname, user.id, user_party.id as udid
+$sql="select user.nickname, user.id, user_party.id as upid
         from user
         inner join user_party
         on user.id = user_party.user_id
         where user_party.party_id = $party_id;";
+
+echo "<script> var user_dict = {}; </script>";
+
 $players = mysqli_query($conn,$sql);
+/*
 while($row = mysqli_fetch_array($players)) {
     echo ("UserName: ");
     echo $row["nickname"];
     echo "<br>";
     echo "UPid: ";
-    echo $row["udid"];
+    echo $row["upid"];
     echo "<br>";
+}
+*/
+while($row = mysqli_fetch_array($players)) {
+    echo "<script> user_dict[";
+    echo "'";
+    echo $row['nickname'];
+    echo "'";
+    echo "] = ";
+    echo $row['upid'];
+    echo "</script>";
 }
 
 ?>
+
+    <script>
+        console.log(user_dict);
+        console.log(animal_count);
+        var max_animals = animal_count;
+        var max_player_count = Object.keys(user_dict).length;
+        var max_arrow = 3;
+        var current_arrow = 1;
+        var current_animal = 1;
+        var current_player = 1;
+
+        printCurrentState();
+
+        function nextVolltreffer () {
+            if (current_player == max_player_count){
+                current_player = 1;
+                current_animal ++;
+            }else{
+                current_player ++;
+            }
+            console.log(current_player);
+            //punkte in datenbank
+            printCurrentState();
+        }
+
+        function nextNichtVolltreffer () {
+            if (current_arrow == max_arrow){
+                current_arrow = 1;
+                if (current_player == max_player_count){
+                    current_player = 1;
+                    current_animal ++;
+                }else{
+                    current_player ++;
+                }
+            }else current_arrow ++;
+
+            printCurrentState();
+        }
+
+        function printCurrentState () {
+            newP = document.createElement("p");
+            document.getElementById("message").innerHTML = "<p>" + Object.keys(user_dict)[current_player -1] + ", du bist dran " + "<br>" +
+                current_animal + " Tier" + " / " + current_arrow + " Pfeil." +
+                "</p>" + "<br>" + current_player;
+        }
+
+        console.log(Object.values(user_dict)[0]);
+
+        <?php
+        function sendCurrentPoints ()
+        {
+            $content = http_build_query(array(
+                "user_party_id" => Object . values(user_dict)[current_player - 1]
+            ));
+        }
+        ?>
+
+    </script>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
