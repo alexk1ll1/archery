@@ -25,7 +25,7 @@
                     <a class="nav-link active" aria-current="page" href="#">Login</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Leaderboard</a>
+                    <a class="nav-link" href="stats.html">Leaderboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Anleitung</a>
