@@ -86,6 +86,14 @@ mysqli_stmt_execute($stmt);
 $parcour_id = $_POST["parcour"];
 $party_id = mysqli_insert_id($conn);
 
+$sqlGetAnimalCount = "select animal_count from parcour
+    where id = $party_id";
+
+$animal_count = mysqli_query($conn, $sqlGetAnimalCount);
+$_POST($animal_count);
+
+
+// Insert User Data needed for Game
 foreach ($_POST['user'] as $user_id) {
 
     $sql = "INSERT INTO user_party (user_id, party_id)
