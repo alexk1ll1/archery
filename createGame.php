@@ -68,6 +68,7 @@ if (mysqli_connect_errno()){
 }
 
 echo "Connection successful.";
+echo "<br>";
 
 $sql = "INSERT INTO party (parcour_id)
         VALUES (?)";
@@ -86,13 +87,15 @@ mysqli_stmt_execute($stmt);
 $parcour_id = $_POST["parcour"];
 $party_id = mysqli_insert_id($conn);
 
-$sqlGetAnimalCount = "select animal_count from parcour
-    where id = $party_id";
-
-$animal_count = mysqli_query($conn, $sqlGetAnimalCount);
-$_POST($animal_count);
+$sqlGetAnimalCount = "select * from parcour";
 
 
+$sql = "select animal_count from parcour where id = $parcour_id";
+$result = mysqli_query($conn, $sql);
+$row1 = mysqli_fetch_assoc($result);
+echo "animal_count new:";
+echo $row1["animal_count"];
+echo "<br>";
 // Insert User Data needed for Game
 foreach ($_POST['user'] as $user_id) {
 
@@ -118,14 +121,19 @@ foreach ($_POST['user'] as $user_id) {
 
 mysqli_select_db($conn,"archery");
 
-$sql="select user.nickname, user.id
+$sql="select user.nickname, user.id, user_party.id as udid
         from user
         inner join user_party
         on user.id = user_party.user_id
         where user_party.party_id = $party_id;";
 $players = mysqli_query($conn,$sql);
 while($row = mysqli_fetch_array($players)) {
+    echo ("UserName: ");
     echo $row["nickname"];
+    echo "<br>";
+    echo "UPid: ";
+    echo $row["udid"];
+    echo "<br>";
 }
 
 ?>
