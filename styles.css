@@ -1,6 +1,9 @@
 h2 {
     color: white;
 }
+p {
+    color: white;
+}
 label {
     color: white;
 }
@@ -18,9 +21,16 @@ label {
     margin-top: 40vh;
 }
 
-#menuButtonsMiddle2 {
+#buttonGoUserCreation {
+    margin-top: 20vh;
+}
+
+#buttonGoParkourCreation {
+    margin-top: 0.5vh;
+}
+
+#buttonGoGameCreation {
     margin-top: 2.5vh;
-    margin-bottom: 5vh;
 }
 
 #menuButtonTop {
@@ -47,7 +57,17 @@ label {
 }
 
 #createUserContainer {
+    margin-top: 10vh;
 }
+#createParkourContainer{
+    margin-top: 10vh;
+}
+
+#containerAnleitung{
+    margin-top: 5vh;
+    background: rgba(60, 60, 60, 0.7);
+}
+
 #mainMenuContainer {
     display: none;
 }
