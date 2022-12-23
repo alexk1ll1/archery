@@ -11,8 +11,8 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav" style="display: block">
     <div class="container-fluid">
-        <a class="navbar-brand" id="brand" href="#">
-            <img src="dinoColor.png" id="dino" alt="Dino" width="100" height="80"
+        <a class="navbar-brand" id="brand" href="index.html">
+            <img src="./images/dinoColor.png" id="dino" alt="Dino" width="100" height="80"
                  class="d-inline-block align-text-top ">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -22,24 +22,13 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Login</a>
+                    <a class="nav-link active" aria-current="page" href="index.html">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="stats.html">Leaderboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Anleitung</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                    <a class="nav-link" href="Anleitung.html">Anleitung</a>
                 </li>
             </ul>
         </div>
@@ -50,10 +39,10 @@
 
 </div>
 
-<button id="volltreffer" value="1" onclick="nextVolltreffer(this)">volltreffer</button>
-<button id="mitte" value="2" onclick="nextVolltreffer(this)">mitte</button>
-<button id="aussen" value="3" onclick="nextVolltreffer(this)">außen</button>
-<button id="nicht_getroffen" value="4" onclick="nextNichtVolltreffer(this)">nicht getroffen</button>
+<button id="volltreffer" value="1" onclick="nextVolltreffer(this)"><img src="images/Zielscheibe_1"></button>
+<button id="mitte" value="2" onclick="nextVolltreffer(this)"><img src="images/Zielscheibe_2"></button>
+<button id="aussen" value="3" onclick="nextVolltreffer(this)"><img src="images/Zielscheibe_3"></button>
+<button id="nicht_getroffen" value="4" onclick="nextNichtVolltreffer(this)"><img src="images/Zielscheibe_grau"></button>
 
 <div class="container mt-5">
 
@@ -76,8 +65,6 @@ if (mysqli_connect_errno()){
     die("Connection Error: " . mysqli_connect_error());
 }
 
-echo "Connection successful.";
-echo "<br>";
 
 $sql = "INSERT INTO party (parcour_id)
         VALUES (?)";
@@ -100,9 +87,6 @@ $party_id = mysqli_insert_id($conn);
 $sql = "select animal_count from parcour where id = $parcour_id";
 $result = mysqli_query($conn, $sql);
 $row1 = mysqli_fetch_assoc($result);
-echo "animal_count new:";
-echo $row1["animal_count"];
-echo "<br>";
 
 echo
   "<script>
@@ -166,7 +150,7 @@ while($row = mysqli_fetch_array($players)) {
 
 ?>
 
-    <script>
+   <script>
         console.log(user_dict);
         console.log(animal_count);
         var max_animals = animal_count;

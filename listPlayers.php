@@ -12,8 +12,8 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav" style="display: block">
     <div class="container-fluid">
-        <a class="navbar-brand" id="brand" href="#">
-            <img src="dinoColor.png" id="dino" alt="Dino" width="100" height="80"
+        <a class="navbar-brand" id="brand" href="index.html">
+            <img src="./images/dinoColor.png" id="dino" alt="Dino" width="100" height="80"
                  class="d-inline-block align-text-top ">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -29,18 +29,7 @@
                     <a class="nav-link" href="stats.html">Leaderboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Anleitung</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                    <a class="nav-link" href="Anleitung.html">Anleitung</a>
                 </li>
             </ul>
         </div>
@@ -64,13 +53,14 @@
 
 
     echo '<form action="createGame.php" id="createGameForm" method="post">
-            <select  class="selectpicker" id="user" name="user[]" multiple aria-label="Default select example" data-live-search="true">';
+            <select  class="selectpicker" id="user" name="user[]" multiple aria-label="Default select example" data-live-search="true";>';
     while($row = mysqli_fetch_array($result)) {
         echo "<option value='" . $row["id"] . "'>" . $row["nickname"] . "</option>";
     }
     echo "</select>";
 
-    echo '<select name="parcour" id="parcour" class="form-select" aria-label="Default select example">>';
+
+    echo '<select name="parcour" id="parcour" class="form-select" aria-label="Default select example">';
     while($row = mysqli_fetch_array($result2)) {
         echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
     }
