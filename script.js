@@ -53,6 +53,38 @@ function ajaxpost () {
     return false;
 }
 */
+/*
+$("#volltreffer").click(function(upid, currentAnimal, countingId){
+
+    $.ajax({
+        url: 'enterPoints.php',
+        type: 'post',
+        data: {upid: upid,
+            current_animal: currentAnimal,
+            counting_id: countingId
+        },
+        success: function (response) {
+            console.log("works")
+        }
+    });
+});
+*/
+
+
+function uploadPoints (userPartyId, currentAnimal, currentArrow, ring) {
+    $.ajax({
+        url: 'enterPoints.php',
+        type: 'POST',
+        data: {user_party_id: userPartyId,
+            animal_number: currentAnimal,
+            current_arrow: currentArrow,
+            ring: ring
+        },
+        success: function (response) {
+            console.log("works")
+        }
+    });
+}
 
 $("#buttonCreateParkour").click(function(){
     $('#parkourForm').submit(function(e){
@@ -87,4 +119,10 @@ $("#buttonCreateUser").click(function(){
         });
     });
 });
+
+
+
+
+
+
 

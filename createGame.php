@@ -50,14 +50,14 @@
 
 </div>
 
-<button id="volltreffer" onclick="nextVolltreffer()">volltreffer</button>
-<button id="mitte" onclick="nextNichtVolltreffer()">mitte</button>
-<button id="aussen" onclick="nextNichtVolltreffer()">außen</button>
-<button id="nicht_getroffen" onclick="nextNichtVolltreffer()">nicht getroffen</button>
+<button id="volltreffer" value="1" onclick="nextVolltreffer(this)">volltreffer</button>
+<button id="mitte" value="2" onclick="nextVolltreffer(this)">mitte</button>
+<button id="aussen" value="3" onclick="nextVolltreffer(this)">außen</button>
+<button id="nicht_getroffen" value="4" onclick="nextNichtVolltreffer(this)">nicht getroffen</button>
 
 <div class="container mt-5">
-<?php
 
+<?php
 
 print_r($_POST);
 foreach ($_POST['user'] as $user_id) {
@@ -143,6 +143,7 @@ $sql="select user.nickname, user.id, user_party.id as upid
 echo "<script> var user_dict = {}; </script>";
 
 $players = mysqli_query($conn,$sql);
+$fetchTest = mysqli_fetch_array($players);
 /*
 while($row = mysqli_fetch_array($players)) {
     echo ("UserName: ");
@@ -174,22 +175,28 @@ while($row = mysqli_fetch_array($players)) {
         var current_arrow = 1;
         var current_animal = 1;
         var current_player = 1;
+        var counting_id = 1;
 
         printCurrentState();
 
-        function nextVolltreffer () {
+        function nextVolltreffer (x) {
             if (current_player == max_player_count){
                 current_player = 1;
                 current_animal ++;
             }else{
                 current_player ++;
             }
+            current_arrow = 1;
             console.log(current_player);
-            //punkte in datenbank
+
+            var countingMultiplier = x.value;
+
+            uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
+
             printCurrentState();
         }
 
-        function nextNichtVolltreffer () {
+        function nextNichtVolltreffer (x) {
             if (current_arrow == max_arrow){
                 current_arrow = 1;
                 if (current_player == max_player_count){
@@ -199,6 +206,14 @@ while($row = mysqli_fetch_array($players)) {
                     current_player ++;
                 }
             }else current_arrow ++;
+
+            var countingMultiplier = x.value;
+
+            console.log(countingMultiplier);
+            console.log(counting_id);
+            console.log(counting_id + 4*countingMultiplier);
+
+            uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
 
             printCurrentState();
         }
@@ -212,18 +227,11 @@ while($row = mysqli_fetch_array($players)) {
 
         console.log(Object.values(user_dict)[0]);
 
-        <?php
-        function sendCurrentPoints ()
-        {
-            $content = http_build_query(array(
-                "user_party_id" => Object . values(user_dict)[current_player - 1]
-            ));
-        }
-        ?>
 
     </script>
 
 </div>
+<script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
