@@ -77,7 +77,8 @@
     echo "</select>";
     echo "<input type='submit'>";
     echo "</form>";
-    mysqli_close($con);
+
+
 
 
     ?>

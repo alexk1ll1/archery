@@ -46,9 +46,18 @@
     </div>
 </nav>
 
-<div class="container mt-5">
-<?php
+<div id="message">
 
+</div>
+
+<button id="volltreffer" value="1" onclick="nextVolltreffer(this)">volltreffer</button>
+<button id="mitte" value="2" onclick="nextVolltreffer(this)">mitte</button>
+<button id="aussen" value="3" onclick="nextVolltreffer(this)">außen</button>
+<button id="nicht_getroffen" value="4" onclick="nextNichtVolltreffer(this)">nicht getroffen</button>
+
+<div class="container mt-5">
+
+<?php
 
 print_r($_POST);
 foreach ($_POST['user'] as $user_id) {
@@ -68,6 +77,7 @@ if (mysqli_connect_errno()){
 }
 
 echo "Connection successful.";
+echo "<br>";
 
 $sql = "INSERT INTO party (parcour_id)
         VALUES (?)";
@@ -86,12 +96,18 @@ mysqli_stmt_execute($stmt);
 $parcour_id = $_POST["parcour"];
 $party_id = mysqli_insert_id($conn);
 
-$sqlGetAnimalCount = "select animal_count from parcour
-    where id = $party_id";
 
-$animal_count = mysqli_query($conn, $sqlGetAnimalCount);
-$_POST($animal_count);
+$sql = "select animal_count from parcour where id = $parcour_id";
+$result = mysqli_query($conn, $sql);
+$row1 = mysqli_fetch_assoc($result);
+echo "animal_count new:";
+echo $row1["animal_count"];
+echo "<br>";
 
+echo
+  "<script>
+    var animal_count = " . $row1["animal_count"] . ";" .
+  "</script>";
 
 // Insert User Data needed for Game
 foreach ($_POST['user'] as $user_id) {
@@ -118,19 +134,104 @@ foreach ($_POST['user'] as $user_id) {
 
 mysqli_select_db($conn,"archery");
 
-$sql="select user.nickname, user.id
+$sql="select user.nickname, user.id, user_party.id as upid
         from user
         inner join user_party
         on user.id = user_party.user_id
         where user_party.party_id = $party_id;";
+
+echo "<script> var user_dict = {}; </script>";
+
 $players = mysqli_query($conn,$sql);
+$fetchTest = mysqli_fetch_array($players);
+/*
 while($row = mysqli_fetch_array($players)) {
+    echo ("UserName: ");
     echo $row["nickname"];
+    echo "<br>";
+    echo "UPid: ";
+    echo $row["upid"];
+    echo "<br>";
+}
+*/
+while($row = mysqli_fetch_array($players)) {
+    echo "<script> user_dict[";
+    echo "'";
+    echo $row['nickname'];
+    echo "'";
+    echo "] = ";
+    echo $row['upid'];
+    echo "</script>";
 }
 
 ?>
 
+    <script>
+        console.log(user_dict);
+        console.log(animal_count);
+        var max_animals = animal_count;
+        var max_player_count = Object.keys(user_dict).length;
+        var max_arrow = 3;
+        var current_arrow = 1;
+        var current_animal = 1;
+        var current_player = 1;
+        var counting_id = 1;
+
+        printCurrentState();
+
+        function nextVolltreffer (x) {
+            if (current_player == max_player_count){
+                current_player = 1;
+                current_animal ++;
+            }else{
+                current_player ++;
+            }
+            current_arrow = 1;
+            console.log(current_player);
+
+            var countingMultiplier = x.value;
+
+            uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
+
+            printCurrentState();
+        }
+
+        function nextNichtVolltreffer (x) {
+            if (current_arrow == max_arrow){
+                current_arrow = 1;
+                if (current_player == max_player_count){
+                    current_player = 1;
+                    current_animal ++;
+                }else{
+                    current_player ++;
+                }
+            }else current_arrow ++;
+
+            var countingMultiplier = x.value;
+
+            console.log(countingMultiplier);
+            console.log(counting_id);
+            console.log(counting_id + 4*countingMultiplier);
+
+            uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
+
+            printCurrentState();
+        }
+
+        function printCurrentState () {
+            newP = document.createElement("p");
+            document.getElementById("message").innerHTML = "<p>" + Object.keys(user_dict)[current_player -1] + ", du bist dran " + "<br>" +
+                current_animal + " Tier" + " / " + current_arrow + " Pfeil." +
+                "</p>" + "<br>" + current_player;
+        }
+
+        console.log(Object.values(user_dict)[0]);
+
+
+    </script>
+
 </div>
+<script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js" integrity="sha512-FHZVRMUW9FsXobt+ONiix6Z0tIkxvQfxtCSirkKc5Sb4TKHmqq1dZa8DphF0XqKb3ldLu/wgMa8mT6uXiLlRlw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
