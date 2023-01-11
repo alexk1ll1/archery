@@ -160,8 +160,12 @@ while($row = mysqli_fetch_array($players)) {
         printCurrentState();
 
         function nextVolltreffer (x) {
+            var countingMultiplier = x.value;
+            uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
+
             if (current_player == max_player_count){
                 current_player = 1;
+                console.log(current_animal);
                 current_animal ++;
             }else{
                 current_player ++;
@@ -169,31 +173,34 @@ while($row = mysqli_fetch_array($players)) {
             current_arrow = 1;
             console.log(current_player);
 
-            var countingMultiplier = x.value;
 
-            uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
+
+
 
             printCurrentState();
         }
 
         function nextNichtVolltreffer (x) {
+            var countingMultiplier = x.value;
+            uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
             if (current_arrow == max_arrow){
                 current_arrow = 1;
                 if (current_player == max_player_count){
                     current_player = 1;
+                    console.log(current_animal);
                     current_animal ++;
                 }else{
                     current_player ++;
                 }
             }else current_arrow ++;
 
-            var countingMultiplier = x.value;
+
 
             console.log(countingMultiplier);
             console.log(counting_id);
             console.log(counting_id + 4*countingMultiplier);
 
-            uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
+
 
             printCurrentState();
         }
