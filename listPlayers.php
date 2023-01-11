@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css" integrity="sha512-mR/b5Y7FRsKqrYZou7uysnOdCIJib/7r5QeJMFvLNHNhtye3xJp1TdJVPLtetkukFn227nKpXD9OjUc09lx97Q==" crossorigin="anonymous"
           referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="styles.css">
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Archery Test</title>
 </head>
 <body>
 
@@ -51,9 +54,10 @@
     $sql2="SELECT * FROM parcour";
     $result2 = mysqli_query($con, $sql2);
 
-
-    echo '<form action="createGame.php" id="createGameForm" method="post">
-            <select  class="selectpicker" id="user" name="user[]" multiple aria-label="Default select example" data-live-search="true";>';
+    echo '  <div class="h-100 d-flex align-items-center justify-content-center">
+            <form action="createGame.php" id="createGameForm" method="post">
+            <select  class="selectpicker" id="user" name="user[]" multiple aria-label="Default select example" data-live-search="true";>
+            </div>';
     while($row = mysqli_fetch_array($result)) {
         echo "<option value='" . $row["id"] . "'>" . $row["nickname"] . "</option>";
     }
@@ -65,11 +69,8 @@
         echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
     }
     echo "</select>";
-    echo "<input type='submit'>";
+    echo "<input type='submit' id='submit'>";
     echo "</form>";
-
-
-
 
     ?>
 

@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav" style="display: block">
     <div class="container-fluid">
@@ -35,23 +35,19 @@
     </div>
 </nav>
 
-<div id="message">
+<div id="message" style="text-align: center; margin-top: 5vh">
 
 </div>
 
-<button id="volltreffer" value="1" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_1.png" id="Z1" alt="Z1" width="100" height="100"></button>
-<button id="mitte" value="2" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_2.png" id="Z2" alt="Z2" width="100" height="100"></button>
-<button id="aussen" value="3" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_3.png" id="Z3" alt="Z3" width="100" height="100"></button>
-<button id="nicht_getroffen" value="4" onclick="nextNichtVolltreffer(this)"><img src="./images/Zielscheibe_grau.png" id="Zg" alt="Zg" width="100" height="100"></button>
-
+<div id="Zielscheibe">
+<button id="volltreffer" value="1" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_1.png" id="Z1" width="100" height="100"></button>
+<button id="mitte" value="2" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_2.png" id="Z2" width="100" height="100"></button>
+<button id="aussen" value="3" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_3.png" id="Z3" width="100" height="100"></button>
+<button id="nicht_getroffen" value="4" onclick="nextNichtVolltreffer(this)"><img src="./images/Zielscheibe_grau.png" id="Zg" width="100" height="100"></button>
+</div>
 <div class="container mt-5">
 
 <?php
-
-print_r($_POST);
-foreach ($_POST['user'] as $user_id) {
-    print_r($user_id);
-}
 
 $host = "localhost";
 $dbname = "archery";

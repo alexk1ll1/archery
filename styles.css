@@ -56,6 +56,58 @@ label {
     width: 200px;
 }
 
+#Zielscheibe {
+    margin-left: 75vh;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+#volltreffer {
+    background-color: transparent;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+#mitte {
+    background-color: transparent;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+#aussen {
+    background-color: transparent;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+#nicht_getroffen {
+    background-color: transparent;
+    border-bottom: none;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+#submit {
+    background-color: #099701;
+    border-color: white;
+    vertical-align: center;
+}
+
+#parcour{
+    margin-bottom: 5vh;
+    margin-top: 2.5vh;
+    width: 220px;
+}
+
+
 #createUserContainer {
     margin-top: 10vh;
 }
@@ -104,4 +156,9 @@ the content height is greater than the image height */
 * to improve page load speed on mobile internet connections */
         background-image: url(./images/quiver.jpg);
     }
+}
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css');
+html,
+body {
+    height: 100%
 }
