@@ -127,7 +127,7 @@ $sql="select user.nickname, user.id, user_party.id as upid
 echo "<script> var user_dict = {}; </script>";
 
 $players = mysqli_query($conn,$sql);
-$fetchTest = mysqli_fetch_array($players);
+//$fetchTest = mysqli_fetch_array($players);
 /*
 while($row = mysqli_fetch_array($players)) {
     echo ("UserName: ");
