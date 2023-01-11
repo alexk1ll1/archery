@@ -57,11 +57,11 @@ label {
 }
 
 #Zielscheibe {
-    margin-left: 75vh;
     border-bottom: none;
     border-right: none;
     border-left: none;
     border-top: none;
+    alignment: center;
 }
 #volltreffer {
     background-color: transparent;

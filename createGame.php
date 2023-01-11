@@ -35,11 +35,11 @@
     </div>
 </nav>
 
-<div id="message" style="text-align: center; margin-top: 5vh">
+<div id="message" style="text-align: center; margin-top: 5vh; font-size: 15pt;">
 
 </div>
 
-<div id="Zielscheibe">
+<div class="h-20 d-flex align-items-center justify-content-center" id="Zielscheibe">
 <button id="volltreffer" value="1" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_1.png" id="Z1" width="100" height="100"></button>
 <button id="mitte" value="2" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_2.png" id="Z2" width="100" height="100"></button>
 <button id="aussen" value="3" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_3.png" id="Z3" width="100" height="100"></button>
@@ -200,9 +200,9 @@ while($row = mysqli_fetch_array($players)) {
 
         function printCurrentState () {
             newP = document.createElement("p");
-            document.getElementById("message").innerHTML = "<p>" + Object.keys(user_dict)[current_player -1] + ", du bist dran " + "<br>" +
+            document.getElementById("message").innerHTML = "<p>" + "<strong style='font-weight: 700;'>" + Object.keys(user_dict)[current_player -1] + "</strong>" + ", du bist dran " + "<br>" +
                 current_animal + " Tier" + " / " + current_arrow + " Pfeil." +
-                "</p>" + "<br>" + current_player;
+                "</p>" + "<br>";
         }
 
         console.log(Object.values(user_dict)[0]);
