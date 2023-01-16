@@ -2,6 +2,8 @@
 
 $("#contentBox").fadeIn(2000);
 
+
+
 $("#buttonGoToParkourCreation").click(function(){
     $("#mainMenuContainer").fadeOut(1500);
     //$("#contentBox2").delay(1500).fadeIn(2000);
@@ -14,11 +16,10 @@ $("#buttonGoToUserCreation").click(function(){
     $("#createUserContainer").delay(1500).fadeIn(2000);
 });
 
-$("#startButton").click(function(){
-    $("#startButton").fadeOut(1500);
-    $("#mainMenuContainer").delay(1500).fadeIn(2000);
-    $("#mainNav").delay(1500).fadeIn(2000);
-})
+
+
+
+
 
 
 $("#buttonBackToMainMenu").click(function(){
@@ -84,6 +85,10 @@ function uploadPoints (userPartyId, currentAnimal, currentArrow, ring) {
             console.log("works")
         }
     });
+}
+
+function clearForm(x){
+    x.reset();
 }
 
 $("#buttonCreateParkour").click(function(){

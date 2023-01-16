@@ -8,6 +8,9 @@
     <title>Title</title>
 </head>
 
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav" style="display: block">
     <div class="container-fluid">
@@ -38,13 +41,19 @@
 <div id="message" style="text-align: center; margin-top: 5vh; font-size: 15pt;">
 
 </div>
-
 <div class="h-20 d-flex align-items-center justify-content-center" id="Zielscheibe">
-<button id="volltreffer" value="1" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_1.png" id="Z1" width="100" height="100"></button>
-<button id="mitte" value="2" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_2.png" id="Z2" width="100" height="100"></button>
-<button id="aussen" value="3" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_3.png" id="Z3" width="100" height="100"></button>
-<button id="nicht_getroffen" value="4" onclick="nextNichtVolltreffer(this)"><img src="./images/Zielscheibe_grau.png" id="Zg" width="100" height="100"></button>
+<button id="volltreffer" value="1" data-points="20" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_1.png" id="Z1" width="100" height="100"></button>
+<button id="mitte" value="2" data-points="18" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_2.png" id="Z2" width="100" height="100"></button>
+<button id="aussen" value="3" data-points="16" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_3.png" id="Z3" width="100" height="100"></button>
+<button id="nicht_getroffen" value="4" data-points="0" onclick="nextNichtVolltreffer(this)"><img src="./images/Zielscheibe_grau.png" id="Zg" width="100" height="100"></button>
 </div>
+
+<div class="container" style="width: 100%; height: 100%">
+    <canvas id="myChart"></canvas>
+</div>
+
+
+
 <div class="container mt-5">
 
 <?php
@@ -162,7 +171,8 @@ while($row = mysqli_fetch_array($players)) {
         function nextVolltreffer (x) {
             var countingMultiplier = x.value;
             uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
-
+            var points = parseInt(x.getAttribute("data-points")) - (6*(current_arrow -1 ));
+            addData(points, current_player - 1);
             if (current_player == max_player_count){
                 current_player = 1;
                 console.log(current_animal);
@@ -172,11 +182,6 @@ while($row = mysqli_fetch_array($players)) {
             }
             current_arrow = 1;
             console.log(current_player);
-
-
-
-
-
             printCurrentState();
         }
 
@@ -184,6 +189,8 @@ while($row = mysqli_fetch_array($players)) {
             var countingMultiplier = x.value;
             uploadPoints(parseInt(Object.values(user_dict)[current_player - 1]), parseInt(current_animal), current_arrow, countingMultiplier);
             if (current_arrow == max_arrow){
+                var points = parseInt(x.getAttribute("data-points"));
+                addData(points, current_player - 1);
                 current_arrow = 1;
                 if (current_player == max_player_count){
                     current_player = 1;
@@ -201,23 +208,77 @@ while($row = mysqli_fetch_array($players)) {
             console.log(counting_id + 4*countingMultiplier);
 
 
-
             printCurrentState();
         }
 
         function printCurrentState () {
-            newP = document.createElement("p");
-            document.getElementById("message").innerHTML = "<p>" + "<strong style='font-weight: 700;'>" + Object.keys(user_dict)[current_player -1] + "</strong>" + ", du bist dran " + "<br>" +
-                current_animal + " Tier" + " / " + current_arrow + " Pfeil." +
-                "</p>" + "<br>";
+            if(current_animal > max_animals){
+                document.getElementById("message").innerHTML = "<p>Ende<p>";
+                $("#Zielscheibe").fadeOut(1500);
+                $("#Zielscheibe").delay(1500);
+
+                document.getElementById("Zielscheibe").remove();
+            }
+            else{newP = document.createElement("p");
+                document.getElementById("message").innerHTML = "<p>" + "<strong style='font-weight: 700;'>" + Object.keys(user_dict)[current_player -1] + "</strong>" + ", du bist dran " + "<br>" +
+                    current_animal + " Tier" + " / " + current_arrow + " Pfeil." +
+                    "</p>" + "<br>";}
+
         }
 
         console.log(Object.values(user_dict)[0]);
 
 
+        var labels = [];
+        var colors = ["#EA047E","#FF6D28", "#FCE700", "#00F5FF","red", "green", "blue", "white"];
+        var players = Object.keys(user_dict);
+        var gameChart = document.getElementById("myChart");
+
+        for (var i = 0; i <= max_animals; i++){
+            labels.push("Tier " + i);
+        }
+        var dataAll = {
+            labels: labels,
+            datasets: []
+        }
+        var chartOptions = {
+            legend: {
+                display: true,
+                position: 'top',
+                labels: {
+                    boxWidth: 80,
+                    fontColor: 'white'
+                }
+            }
+        };
+        var lineChart = new Chart(gameChart, {
+            type: 'line',
+            data: dataAll,
+            options: chartOptions
+        });
+        for (var i = 0; i < players.length; i++){
+
+            var newDataset = {
+                label: players[i],
+                data: [0],
+                lineTension: 0,
+                fill: false,
+                borderColor: colors[i]
+            };
+            lineChart.data.datasets.push(newDataset);
+            lineChart.update();
+        }
+
+        function addData (points, currentPlayer, currentArrow) {
+            var currentPoints = lineChart.data.datasets[currentPlayer].data[lineChart.data.datasets[currentPlayer].data.length - 1]
+            lineChart.data.datasets[currentPlayer].data.push(currentPoints + points);
+            lineChart.update();
+        }
     </script>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

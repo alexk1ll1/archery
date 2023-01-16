@@ -1,3 +1,6 @@
+#myChart {
+    background-color: rgba(0, 0, 0, .7);
+}
 h2 {
     color: white;
 }
@@ -120,9 +123,7 @@ label {
     background: rgba(60, 60, 60, 0.7);
 }
 
-#mainMenuContainer {
-    display: none;
-}
+
 
 body {
     /* Location of the image */
