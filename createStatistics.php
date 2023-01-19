@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['userid'])) {
+    die('Bitte zuerst <a href="login.php">einloggen</a>');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +50,9 @@
 <div class="container">
     <canvas id="myChart"></canvas>
 </div>
+<div class="container">
+    <canvas id="myChart2"></canvas>
+</div>
 
 
 <?php
@@ -77,7 +86,7 @@ echo "<script> points = []; </script>";
 
 foreach ($_POST['user'] as $user_id) {
 
-    $sql = "select user.nickname, user_party.id as party_id, arrow.id as arrow_id, avg(counting_method.points) as points_per_shot
+    $sql = "select user.nickname, user_party.id as party_id, arrow.id as arrow_id, avg(counting_method.points3) as points_per_shot
             from user
             inner join user_party
             on user.id = user_party.user_id
@@ -96,6 +105,34 @@ foreach ($_POST['user'] as $user_id) {
     }
     foreach($rows as $row){
         echo "<script> points.push(" . $row["points_per_shot"] . "); </script>";
+    }
+
+
+
+}
+
+echo "<script> rings = []; </script>";
+
+foreach ($_POST['user'] as $user_id) {
+
+    $sql = "select counting_method.ring as ring, count(counting_method.ring) as ringCount
+            from user
+            inner join user_party
+            on user.id = user_party.user_id
+            inner join arrow
+            on user_party.id = arrow.user_party_id
+            inner join counting_method
+            on arrow.counting_id = counting_method.id
+            where user.id = $user_id
+            group by ring";
+    $result = mysqli_query($conn, $sql);
+
+    $rows = array();
+    while($row = $result->fetch_assoc()){
+        $rows[] = $row;
+    }
+    foreach($rows as $row){
+        echo "<script> rings.push(" . $row["ringCount"] . "); </script>";
     }
 
 
@@ -151,8 +188,47 @@ foreach ($_POST['user'] as $user_id) {
             }
         }
     });
+
+
+    var ringsCanvas = document.getElementById("myChart2");
+
+    Chart.defaults.font.family = "Lato";
+    Chart.defaults.font.size = 22;
+    Chart.defaults.color = "white";
+
+    var ringsData = {
+        labels: ["Volltreffer","Mitte","Außen","Nicht getroffen"],
+        datasets: [{
+            data: rings,
+            backgroundColor: [
+                "rgba(255, 0, 0, 0.5)",
+                "rgba(100, 255, 0, 0.5)",
+                "rgba(200, 50, 255, 0.5)",
+                "rgba(0, 100, 255, 0.5)"
+            ]
+        }]
+    };
+
+    var chartOptions = {
+        plugins: {
+            title: {
+                display: true,
+                align: "center",
+                text: "Getroffene Ringe"
+            },
+            legend: {
+                align: "start"
+            }
+        }
+    };
+
+    var polarAreaChart = new Chart(ringsCanvas, {
+        type: 'polarArea',
+        data: ringsData,
+        options: chartOptions
+    });
 </script>
-</script>
+
 
 
 

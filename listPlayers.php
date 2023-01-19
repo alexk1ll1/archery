@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['userid'])) {
+    die('Bitte zuerst <a href="login.php">einloggen</a>');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +33,16 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Login</a>
+                    <a class="nav-link active" aria-current="page" href="userLogin.php">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="stats.html">Leaderboard</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Anleitung.html">Anleitung</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="userRegistration.php">Registrieren</a>
                 </li>
             </ul>
         </div>
@@ -69,8 +79,23 @@
         echo "<option value='" . $row["id"] . "'>" . $row["name"] . "</option>";
     }
     echo "</select>";
-    echo "<input type='submit' id='submit'>";
+    echo "<div class='container'>";
+    echo "<div class='row gy-4'>";
+    echo "<div class='col-12 text-center'>";
+    echo "<button class='btn btn-primary' type='submit' style='background-color: #099701; border-color: white'>3-Pfeilwertugn
+              </button>";
+    echo "</div>";
+    echo "</div>";
+
+    echo "<div class='col-12 text-center'>";
+    echo "<button class='btn btn-primary' type='submit' formaction='createGame2.php' style='background-color: #099701; border-color: white'>2-Pfeilwertung
+              </button>";
+
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
     echo "</form>";
+
 
     ?>
 

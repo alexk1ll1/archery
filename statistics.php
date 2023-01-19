@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(!isset($_SESSION['userid'])) {
+    die('Bitte zuerst <a href="login.php">einloggen</a>');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +32,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Login</a>
+                    <a class="nav-link active" aria-current="page" href="userLogin.php">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="statistics.php">Leaderboard</a>
