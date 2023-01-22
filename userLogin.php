@@ -19,37 +19,12 @@
 </head>
 <body>
 <!-- Nav Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
-    <div class="container-fluid">
-        <a class="navbar-brand" id="brand" href="index.html">
-            <img src="./images/dinoColor.png" id="dino" alt="Dino" width="100" height="80"
-                 class="d-inline-block align-text-top ">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="userLogin.php">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="statistics.php">Statistiken</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Anleitung.html">Anleitung</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="userRegistration.php">Registrieren</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php
+
+require "navbar.element.php";
+?>
 
 <?php
-session_start();
 $pdo = new PDO('mysql:host=localhost;dbname=archery', 'root', '');
 
 if (isset($_GET['login'])) {
@@ -63,7 +38,11 @@ if (isset($_GET['login'])) {
     //Überprüfung des Passworts
     if ($user !== false && password_verify($passwort, $user['passwort'])) {
         $_SESSION['userid'] = $user['id'];
-        die('Login erfolgreich. Weiter zu <a href="geheim.php">internen Bereich</a>');
+        die('<div class="container" id="containerAnleitung">
+  <div class="col text-center">
+    <h2>Erfolgreich eingeloggt</h2>
+  </div>
+</div>');
     } else {
         $errorMessage = "E-Mail oder Passwort war ungültig<br>";
     }
@@ -84,14 +63,16 @@ if (isset($errorMessage)) {
 ?>
 <div class="container">
     <div class="row"></div>
-    <div class="col text-center">
+    <div class="col text-center" id="createUserContainer">
         <form action="?login=1" method="post">
             <div class="container">
                 <div class="col text-center">
+                    <h2>Login</h2>
                     <div class="row justify-content-center">
                         <div class="mb-3">
                             <label for="email" class="form-label">E-Mail</label>
-                            <input type="email" size="40" class="form-control" maxlength="250" name="email">
+                            <input type="email" size="40" placeholder="E-Mail" class="form-control" maxlength="250"
+                                   name="email">
                         </div>
                     </div>
                 </div>
@@ -100,19 +81,24 @@ if (isset($errorMessage)) {
                         <div class="row justify-content-center">
                             <div class="mb-3">
                                 <label for="passwort" class="form-label">Passwort</label>
-                                <input type="password" class="form-control" size="40" maxlength="250" name="passwort">
+                                <input type="password" class="form-control" placeholder="Passwort" size="40"
+                                       maxlength="250" name="passwort">
                             </div>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary" type="submit" style="background-color: #099701; border-color: white"
-                        id="buttonCreateUser">Login
-                </button>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit"
+                            id="buttonCreateUser">Login
+                    </button>
+                    <a class="btn btn-primary" href="index.php"
+                       role="button">Zurück</a>
+                </div>
             </div>
         </form>
     </div>
 </div>
-</div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

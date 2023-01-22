@@ -1,9 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['userid'])) {
-    header("Location: loginError.html");
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,11 +19,35 @@ if (!isset($_SESSION['userid'])) {
 </head>
 <body>
 <!-- Nav Bar -->
+
 <?php
-require "navbar.element.php";
+require "navbar.element.php"
 ?>
 
-<!--Parkour erstellen-->
+
+<!-- Start Screen -->
+
+
+<!-- Haupt Menü -->
+<div class="container" id="mainMenuContainer">
+    <div class="col text-center">
+        <a class="btn btn-primary" href="createUser.php"
+           role="button" id="buttonGoUserCreation">Erstelle User</a>
+    </div>
+    <br>
+    <div class="col text-center">
+        <a class="btn btn-primary" href="createParcour.php"
+           role="button" id="buttonGoParkourCreation">Erstelle Parkour</a>
+    </div>
+    <br>
+    <div class="col text-center">
+        <a href="listPlayers.php" class="btn btn-primary"
+           id="buttonGoToGameCreation">Spiel erstellen</a>
+    </div>
+</div>
+
+<!--Parkour Erstellen-->
+<!--
 <div class="container" id="createParkourContainer">
     <div class="col text-center">
         <h2>Parkour</h2>
@@ -39,7 +57,7 @@ require "navbar.element.php";
                 </div>
                 <div class="container">
                     <div class="col text-center">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-md-center">
                             <div class="mb-3">
                                 <label for="parkourName" class="form-label">Parkour Name</label>
                                 <input type="text" class="form-control" id="parkourName" name="parkourName"
@@ -48,7 +66,7 @@ require "navbar.element.php";
                         </div>
                     </div>
                     <div class="col text-center">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-md-center">
                             <div class="mb-3">
                                 <label for="location" class="form-label">Location</label>
                                 <input type="text" class="form-control" id="location" name="location"
@@ -57,7 +75,7 @@ require "navbar.element.php";
                         </div>
                     </div>
                     <div class="col text-center">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-md-center">
                             <div class="mb-3">
                                 <label for="numOfTargets" class="form-label">Anzahl der Ziele/Tiere</label>
                                 <input type="number" class="form-control" id="numOfTargets" name="numOfTargets"
@@ -67,12 +85,10 @@ require "navbar.element.php";
                     </div>
                     <div class="col text-center">
                         <div class="col-12">
-                            <button class="btn btn-primary" type="submit"
-                                    id="buttonCreateParkour">
-                                Erstellen
+                            <button class="btn btn-primary" type="submit" id="buttonCreateParkour">Erstellen
                             </button>
-                            <a class="btn btn-primary" href="index.php"
-                               role="button">Zurück</a>
+                            <button class="btn btn-primary" id="buttonBackToMainMenu">Zurück
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -80,7 +96,60 @@ require "navbar.element.php";
         </form>
     </div>
 </div>
+-->
 
+<!--User Erstellen-->
+<!--
+<div class="container" id="createUserContainer">
+    <div class="col text-center">
+        <h2>User</h2>
+        <form  id="userForm">
+            <div class="container">
+                <div class="col text-center">
+                </div>
+                <div class="container" id="UserErstellung">
+                    <div class="col text-center">
+                        <div class="row justify-content-md-center">
+                            <div class="mb-3">
+                                <label for="fName" class="form-label">Vorname</label>
+                                <input type="text" class="form-control" id="fName" name="fName"
+                                       placeholder="coller name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <div class="row justify-content-md-center">
+                            <div class="mb-3">
+                                <label for="lName" class="form-label">Nachname</label>
+                                <input type="text" class="form-control" id="lName" name="lName"
+                                       placeholder="coller name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <div class="row justify-content-md-center">
+                            <div class="mb-3">
+                                <label for="nName" class="form-label">Nickname</label>
+                                <input type="text" class="form-control" id="nName" name="nName"
+                                       placeholder="coller name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col text-center">
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit" id="buttonCreateUser">Erstellen
+                            </button>
+
+                            <button class="btn btn-primary" id="buttonCreateUserBackToMainMenu">Zurück
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+-->
 <!--
 <div class="container" id="createGameContainer">
     <div class="col text-center">
