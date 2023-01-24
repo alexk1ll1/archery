@@ -20,7 +20,7 @@
 require "navbar.element.php";
 ?>
 
-<div id="message" style="text-align: center; margin-top: 5vh; font-size: 15pt;">
+<div class="container" id="message" style="text-align: center; margin-top: 5vh; font-size: 15pt;">
 
 </div>
 <div class="h-20 d-flex align-items-center justify-content-center" id="Zielscheibe">
@@ -36,7 +36,7 @@ require "navbar.element.php";
                 src="./images/Zielscheibe_grau.png" id="Zg" width="100" height="100"></button>
 </div>
 
-<div class="container" style="width: 100%; height: 100%">
+<div class="container" id="chartBox" style="width: 100%; height: 100%">
     <canvas id="myChart"></canvas>
 </div>
 
@@ -202,6 +202,7 @@ require "navbar.element.php";
                 document.getElementById("message").innerHTML = "<p>Ende<p>";
                 $("#Zielscheibe").fadeOut(1500);
                 $("#Zielscheibe").delay(1500);
+                createTable();
 
                 document.getElementById("Zielscheibe").remove();
             } else {
@@ -256,13 +257,61 @@ require "navbar.element.php";
             lineChart.update();
         }
 
+
         function addData(points, currentPlayer, currentArrow) {
             var currentPoints = lineChart.data.datasets[currentPlayer].data[lineChart.data.datasets[currentPlayer].data.length - 1]
             lineChart.data.datasets[currentPlayer].data.push(currentPoints + points);
             lineChart.update();
         }
+
+
+        function createTable() {
+            console.log('triggered');
+            const chartBox = document.querySelector('#chartBox');
+            const tableDiv = document.createElement('div');
+            tableDiv.setAttribute('id', 'tableDiv');
+
+            const table = document.createElement('table');
+            table.classList.add('table', 'table-fit', 'mt-5', 'table-dark', 'table-striped');
+
+            //add thead
+            const thead = table.createTHead();
+            thead.classList.add('chartjs-thead');
+
+            thead.insertRow(0);
+            for (let i = 0; i < lineChart.data.labels.length; i++) {
+                thead.rows[0].insertCell(i).innerText = lineChart.data.labels[i];
+            }
+            thead.rows[0].insertCell(0).innerText = 'Tiere';
+            thead.rows[0].insertCell(lineChart.data.labels.length + 1).innerText = 'Durchschnitt';
+
+            //tbody
+            const tbody = table.createTBody();
+            tbody.classList.add('chartjs-tbody');
+
+            lineChart.data.datasets.map((dataset, index) => {
+                tbody.insertRow(index);
+                for (let i = 0; i < lineChart.data.datasets[0].data.length; i++) {
+                    tbody.rows[index].insertCell(i).innerText = dataset.data[i];
+                }
+                tbody.rows[index].insertCell(0).innerText = dataset.label;
+                tbody.rows[index].insertCell(lineChart.data.datasets[0].data.length + 1).innerText = (dataset.data[dataset.data.length - 1]) / (dataset.data.length - 1);
+            })
+
+
+            //append
+            chartBox.appendChild(tableDiv);
+            tableDiv.appendChild(table);
+        }
+
     </script>
 
+
+</div>
+<div class="container">
+    <table>
+
+    </table>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

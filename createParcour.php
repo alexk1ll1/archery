@@ -43,7 +43,7 @@ require "navbar.element.php";
                             <div class="mb-3">
                                 <label for="parkourName" class="form-label">Parkour Name</label>
                                 <input type="text" class="form-control" id="parkourName" name="parkourName"
-                                       placeholder="coller name">
+                                       placeholder="Parkour Name">
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ require "navbar.element.php";
                             <div class="mb-3">
                                 <label for="location" class="form-label">Location</label>
                                 <input type="text" class="form-control" id="location" name="location"
-                                       placeholder="coller name">
+                                       placeholder="Location">
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@ require "navbar.element.php";
                             <div class="mb-3">
                                 <label for="numOfTargets" class="form-label">Anzahl der Ziele/Tiere</label>
                                 <input type="number" class="form-control" id="numOfTargets" name="numOfTargets"
-                                       placeholder="coller name">
+                                       placeholder="Anzahl der Ziele">
                             </div>
                         </div>
                     </div>

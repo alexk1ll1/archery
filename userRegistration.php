@@ -42,7 +42,7 @@ $pdo = new PDO('mysql:host=localhost;dbname=archery', 'root', '');
                     <a class="nav-link" href="statistics.php">Statistiken</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Anleitung.html">Anleitung</a>
+                    <a class="nav-link" href="Anleitung.php">Anleitung</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="userRegistration.php">Registrieren</a>

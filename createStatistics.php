@@ -172,7 +172,7 @@ foreach ($_POST['user'] as $user_id) {
     var ringsCanvas = document.getElementById("myChart2");
 
     Chart.defaults.font.family = "Lato";
-    Chart.defaults.font.size = 22;
+    Chart.defaults.font.size = 15;
     Chart.defaults.color = "white";
 
     var ringsData = {

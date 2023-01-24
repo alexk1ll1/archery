@@ -23,7 +23,7 @@ if (!isset($_SESSION['userid'])) {
                     <a class="nav-link" href="statistics.php">Statistiken</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Anleitung.html">Anleitung</a>
+                    <a class="nav-link" href="Anleitung.php">Anleitung</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="userRegistration.php">Registrieren</a>
@@ -54,7 +54,7 @@ if (!isset($_SESSION['userid'])) {
                     <a class="nav-link" href="statistics.php">Statistiken</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="Anleitung.html">Anleitung</a>
+                    <a class="nav-link" href="Anleitung.php">Anleitung</a>
                 </li>
             </ul>
         </div>
