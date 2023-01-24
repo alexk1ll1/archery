@@ -45,7 +45,7 @@ require "navbar.element.php";
         $result2 = mysqli_query($con, $sql2);
 
         echo '  
-            <form action="createGame.php" id="createGameForm" method="post">
+            <form action="createGameNew.php" id="createGameForm" method="post">
             <div class="d-flex align-items-center justify-content-center">
             <div class="row gy-3 justify-content-center">
             <div class="col text-center" style="margin-right: 20px">
@@ -82,7 +82,7 @@ require "navbar.element.php";
 
 
         echo "<div  class='col-12 text-center'>";
-        echo "<button class='btn btn-primary' type='submit' formaction='createGame2.php'>2-Pfeilwertung
+        echo "<button class='btn btn-primary' type='submit' formaction='createGame2New.php'>2-Pfeilwertung
               </button>";
         echo "</div>";
         echo "<div class='col-12 text-center'>";

@@ -19,7 +19,7 @@ if (!isset($_SESSION['userid'])) {
           crossorigin="anonymous"
           referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="styles.css">
-    <title>Archery Test</title>
+    <title>Archery</title>
 </head>
 <body>
 
