@@ -307,7 +307,7 @@ while ($row = mysqli_fetch_array($players)) {
             thead.rows[0].insertCell(i).innerText = lineChart.data.labels[i];
         }
         thead.rows[0].insertCell(0).innerText = 'Tiere';
-        thead.rows[0].insertCell(lineChart.data.labels.length + 1).innerText = 'Durchschnitt';
+        thead.rows[0].insertCell(lineChart.data.labels.length + 1).innerText = 'avg';
 
         //tbody
         const tbody = table.createTBody();
