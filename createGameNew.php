@@ -32,17 +32,35 @@ require "navbar.element.php";
 <div class="container" id="message" style="text-align: center; margin-top: 5vh; font-size: 15pt;">
 
 </div>
-<div class="h-20 d-flex align-items-center justify-content-center" id="Zielscheibe">
-    <button id="volltreffer" value="1" data-points="20" onclick="nextVolltreffer(this)"><img
-                src="./images/Zielscheibe_1.png" id="Z1" width="100" height="100"></button>
-    <button id="mitte" value="2" data-points="18" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_2.png"
-                                                                                       id="Z2" width="100" height="100">
-    </button>
-    <button id="aussen" value="3" data-points="16" onclick="nextVolltreffer(this)"><img src="./images/Zielscheibe_3.png"
-                                                                                        id="Z3" width="100"
-                                                                                        height="100"></button>
-    <button id="nicht_getroffen" value="4" data-points="0" onclick="nextNichtVolltreffer(this)"><img
-                src="./images/Zielscheibe_grau.png" id="Zg" width="100" height="100"></button>
+<div class="container" id="Zielscheibe">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <button id="volltreffer" value="1" data-points="20" onclick="nextVolltreffer(this)"><img
+                        src="./images/Zielscheibe_1.png" id="Z1" width="100" height="100"></button>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <button id="mitte" value="2" data-points="18" onclick="nextVolltreffer(this)"><img
+                        src="./images/Zielscheibe_2.png"
+                        id="Z2" width="100" height="100">
+            </button>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <button id="aussen" value="3" data-points="16" onclick="nextVolltreffer(this)"><img
+                        src="./images/Zielscheibe_3.png"
+                        id="Z3" width="100"
+                        height="100"></button>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <button id="nicht_getroffen" value="4" data-points="0" onclick="nextNichtVolltreffer(this)"><img
+                        src="./images/Zielscheibe_grau.png" id="Zg" width="100" height="100"></button>
+        </div>
+    </div>
 </div>
 
 <div class="container" id="chartBox" style="width: 100%; height: 100%">
