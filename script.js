@@ -1,38 +1,28 @@
-
-
 $("#contentBox").fadeIn(2000);
 
 
-
-$("#buttonGoToParkourCreation").click(function(){
+$("#buttonGoToParkourCreation").click(function () {
     $("#mainMenuContainer").fadeOut(1500);
     //$("#contentBox2").delay(1500).fadeIn(2000);
     $("#createParkourContainer").delay(1500).fadeIn(2000);
 });
 
-$("#buttonGoToUserCreation").click(function(){
+$("#buttonGoToUserCreation").click(function () {
     $("#mainMenuContainer").fadeOut(1500);
     //$("#contentBox2").delay(1500).fadeIn(2000);
     $("#createUserContainer").delay(1500).fadeIn(2000);
 });
 
 
-
-
-
-
-
-$("#buttonBackToMainMenu").click(function(){
+$("#buttonBackToMainMenu").click(function () {
     $("#createParkourContainer").fadeOut(1500);
     $("#mainMenuContainer").delay(1500).fadeIn(2000);
 })
 
-$("#buttonCreateUserBackToMainMenu").click(function(){
+$("#buttonCreateUserBackToMainMenu").click(function () {
     $("#createUserContainer").fadeOut(1500);
     $("#mainMenuContainer").delay(1500).fadeIn(2000);
 })
-
-
 
 
 /*
@@ -54,6 +44,7 @@ function ajaxpost () {
     return false;
 }
 */
+
 /*
 $("#volltreffer").click(function(upid, currentAnimal, countingId){
 
@@ -72,11 +63,12 @@ $("#volltreffer").click(function(upid, currentAnimal, countingId){
 */
 
 
-function uploadPoints (userPartyId, currentAnimal, currentArrow, ring) {
+function uploadPoints(userPartyId, currentAnimal, currentArrow, ring) {
     $.ajax({
         url: 'enterPoints.php',
         type: 'POST',
-        data: {user_party_id: userPartyId,
+        data: {
+            user_party_id: userPartyId,
             animal_number: currentAnimal,
             current_arrow: currentArrow,
             ring: ring
@@ -87,38 +79,40 @@ function uploadPoints (userPartyId, currentAnimal, currentArrow, ring) {
     });
 }
 
-function clearForm(x){
+function clearForm(x) {
     x.reset();
 }
 
-$("#buttonCreateParkour").click(function(){
-    $('#parkourForm').submit(function(e){
+$("#buttonCreateParkour").click(function () {
+    $('#parkourForm').submit(function (e) {
         e.preventDefault();
         $.ajax({
             url: "processFormParkour.php",
             type: "POST",
             data: $(this).serialize(),
-            success: function(data){
+            success: function (data) {
                 $("#postData").html(data);
+                alert("Parkur erstellt");
             },
-            error: function(){
+            error: function () {
                 alert("Form submission failed!");
             }
         });
     });
 });
 
-$("#buttonCreateUser").click(function(){
-    $('#userForm').submit(function(e){
+$("#buttonCreateUser").click(function () {
+    $('#userForm').submit(function (e) {
         e.preventDefault();
         $.ajax({
             url: "processFormUser.php",
             type: "POST",
             data: $(this).serialize(),
-            success: function(data){
+            success: function (data) {
                 $("#postData").html(data);
+                alert("User erstellt");
             },
-            error: function(){
+            error: function () {
                 alert("Form submission failed!");
             }
         });
