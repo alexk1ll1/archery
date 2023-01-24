@@ -76,7 +76,7 @@ require "navbar.element.php";
         echo "<div class='container'>";
         echo "<div class='row gy-4'>";
         echo "<div style='margin-top: 0px;' class='col-12 text-center'>";
-        echo "<button class='btn btn-primary' type='submit'>3-Pfeilwertugn
+        echo "<button class='btn btn-primary' type='submit'>3-Pfeilwertung
               </button>";
         echo "</div>";
 
